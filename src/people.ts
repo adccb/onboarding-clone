@@ -1,5 +1,5 @@
 import type { Person, Dict, GetPersonProps } from "./types/";
-import { getPerson } from "./types/";
+import { getPerson, isPerson } from "./types/";
 
 const musicians: Dict<GetPersonProps> = {
   jimi: { first: "Jimi", last: "Hendrix" },
@@ -12,6 +12,8 @@ const musicians: Dict<GetPersonProps> = {
   kim: { first: "Kim", last: "Deal", vocation: "bassist" },
 };
 
-const people: Person[] = Object.values(musicians).map(getPerson);
+const people: Person[] = Object.values(musicians)
+  .map(getPerson)
+  .filter(isPerson);
 
 export default people;

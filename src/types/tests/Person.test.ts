@@ -3,7 +3,12 @@ import type { Person } from "../";
 
 describe("isPerson", () => {
   it("correctly identifies Person objects", () => {
-    const person = getPerson();
+    const person = getPerson({
+      first: "first",
+      last: "last",
+      vocation: "vocalist",
+    });
+
     expect(isPerson(person)).toBe(true);
   });
 

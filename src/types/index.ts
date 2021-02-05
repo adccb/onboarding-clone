@@ -1,10 +1,18 @@
 // general purpose types
 export type Dict<T> = Record<string, T>;
 export type StringDict = Dict<string>;
+export type Maybe<T> = T | object;
 
 // Person-specific types
 export type Name = { first: string; last: string };
 export type Vocation = "vocalist" | "guitarist" | "bassist" | "drummer";
+
+export const vocations: Dict<Vocation> = {
+  vocalist: "vocalist",
+  guitarist: "guitarist",
+  bassist: "bassist",
+  drummer: "drummer",
+};
 
 export type Person = {
   name: Name;
@@ -18,7 +26,7 @@ export const isPerson = (foo: object | Person): foo is Person =>
   typeof foo.name === "object" &&
   typeof foo.name.first === "string" &&
   typeof foo.name.first === "string" &&
-  typeof foo.vocation === "string";
+  foo.vocation in vocations;
 
 export const isSamePerson = (p: Person, q: Person) =>
   p.name.first === q.name.first &&
@@ -32,10 +40,10 @@ export type GetPersonProps = {
   vocation?: Vocation;
 };
 export const getPerson = ({
-  first = "Kurt",
-  last = "Cobain",
-  vocation = "guitarist",
-}: GetPersonProps = {}): Person => ({
+  first,
+  last,
+  vocation,
+}: GetPersonProps = {}): Maybe<Person> => ({
   name: { first, last },
   vocation,
 });
