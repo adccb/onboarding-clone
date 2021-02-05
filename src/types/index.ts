@@ -1,7 +1,7 @@
 // general purpose types
 export type Dict<T> = Record<string, T>;
 export type StringDict = Dict<string>;
-export type Maybe<T> = T | object;
+export type Maybe<T> = T | null;
 
 // Person-specific types
 export type Name = { first: string; last: string };
@@ -20,7 +20,8 @@ export type Person = {
 };
 
 // https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards
-export const isPerson = (foo: object | Person): foo is Person =>
+export const isPerson = (foo: null | object | Person): foo is Person =>
+  foo !== null &&
   "name" in foo &&
   "vocation" in foo &&
   typeof foo.name === "object" &&
@@ -37,13 +38,16 @@ export const isSamePerson = (p: Person, q: Person) =>
 export type GetPersonProps = {
   first?: string;
   last?: string;
-  vocation?: Vocation;
+  vocation: Vocation;
 };
 export const getPerson = ({
   first,
   last,
   vocation,
-}: GetPersonProps = {}): Maybe<Person> => ({
-  name: { first, last },
-  vocation,
-});
+}: GetPersonProps): Maybe<Person> =>
+  typeof first === "string" && typeof last === "string" && vocation in vocations
+    ? {
+        name: { first, last },
+        vocation,
+      }
+    : null;

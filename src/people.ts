@@ -2,18 +2,18 @@ import type { Person, Dict, GetPersonProps } from "./types/";
 import { getPerson, isPerson } from "./types/";
 
 const musicians: Dict<GetPersonProps> = {
-  jimi: { first: "Jimi", last: "Hendrix" },
+  jimi: { first: "Jimi", last: "Hendrix", vocation: "guitarist" },
   john: { first: "John", last: "Bonham", vocation: "drummer" },
   sheila: { first: "Shiela", last: "Escovedo", vocation: "drummer" },
   ozzy: { first: "John", last: "Osborne", vocation: "vocalist" },
-  tosin: { first: "Tosin", last: "Abasi" },
+  tosin: { first: "Tosin", last: "Abasi", vocation: "guitarist" },
   janis: { first: "Janis", last: "Joplin", vocation: "vocalist" },
   victor: { first: "Victor", last: "Wooten", vocation: "bassist" },
   kim: { first: "Kim", last: "Deal", vocation: "bassist" },
 };
 
 const people: Person[] = Object.values(musicians)
-  .map(getPerson)
-  .filter(isPerson);
+  .map(getPerson) // returns Maybe<Person>[]
+  .filter(isPerson); // returns Person[]
 
 export default people;

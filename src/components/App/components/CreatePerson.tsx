@@ -4,40 +4,31 @@ import type { Person, Vocation } from "../../../types/";
 import { vocations, isPerson, getPerson } from "../../../types/";
 
 type CreatePersonProps = {
-  createPerson: (arg0: Person) => void;
+  createPerson: (arg0: Person) => Promise<void>;
 };
 
 type CreatePersonState = {
-  first?: string;
-  last?: string;
-  vocation?: Vocation;
+  first: string;
+  last: string;
+  vocation: Vocation;
 };
 
 const defaultState: CreatePersonState = {
-  first: undefined,
-  last: undefined,
+  first: "",
+  last: "",
   vocation: Object.values(vocations)[0],
 };
 
 const CreatePerson: React.FC<CreatePersonProps> = ({ createPerson }) => {
   const [formState, updateFormState] = useState(defaultState);
 
-  const update = ({
-    currentTarget,
-  }:
-    | React.KeyboardEvent<HTMLInputElement>
-    | React.ChangeEvent<HTMLSelectElement>) =>
-    updateFormState({
-      ...formState,
-      [currentTarget.name]: currentTarget.value,
-    });
-
   const submit = () => {
     const maybePerson = getPerson({ first, last, vocation });
-    if (isPerson(maybePerson)) {
-      createPerson(maybePerson);
-      updateFormState(defaultState);
-    } else alert("whoops");
+    if (isPerson(maybePerson))
+      createPerson(maybePerson).then(() => {
+        updateFormState(() => defaultState);
+      });
+    else alert("whoops");
   };
 
   const { first, last, vocation } = formState;
@@ -45,15 +36,34 @@ const CreatePerson: React.FC<CreatePersonProps> = ({ createPerson }) => {
   return (
     <div>
       <input
-        name="first"
         type="text"
         placeholder="first name"
-        onKeyUp={update}
+        value={first}
+        onChange={(e) =>
+          updateFormState({ ...formState, first: e.target.value })
+        }
       />
 
-      <input name="last" type="text" placeholder="last name" onKeyUp={update} />
+      <input
+        name="last"
+        type="text"
+        placeholder="last name"
+        value={last}
+        onChange={(e) =>
+          updateFormState({ ...formState, last: e.target.value })
+        }
+      />
 
-      <select name="vocation" value={vocation} onChange={update}>
+      <select
+        name="vocation"
+        value={vocation}
+        onChange={(e) =>
+          updateFormState({
+            ...formState,
+            vocation: e.target.value as Vocation,
+          })
+        }
+      >
         {Object.values(vocations).map((vocation) => (
           <option value={vocation}>{vocation}</option>
         ))}
