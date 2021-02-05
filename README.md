@@ -1,46 +1,19 @@
-# Getting Started with Create React App
+# onboarding-clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+hi! i made this clone to help us learn typescript. it's the same sort of thing as the CRUD challenge we give interview candidates, just tweaked a bit to allow some more exploration.
 
-## Available Scripts
+# things that are in place
+this is a create-react-app app, meaning you can just clone it, npm install, and get going!
 
-In the project directory, you can run:
+in terms of code stuff i've provided, when you open the app you'll see a list of musicians along with the instrument they play. under the hood there's `Person` type definitions and stuff you'll find under `types/`, there's a few plain old react components to glue them together under `components/`, and that's...about it!
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## what you can do from here
+our take-home assignment is creating CRUD functionality, which you should absolutely do. i've included a mock API in `api/` which should provide a decent real-world "make request, get back payload, act on it" flow. i'd encourage you to use this.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+other fun stuff to do when that's done include (but are not limited to):
+- make the rows display little emoji of the person's instrument
+- sort/filter by name or instrument
+- expand the `Person` data model to include things like age, living or not, geographic ties, hair color, or anything else you can think of
+- expanding to list producers as well as musicians
+- idk, connecting to spotify to play a random one of the artist's songs? go wild!
