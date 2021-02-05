@@ -21,6 +21,7 @@ const defaultState: CreatePersonState = {
 
 const CreatePerson: React.FC<CreatePersonProps> = ({ createPerson }) => {
   const [formState, updateFormState] = useState(defaultState);
+  const { first, last, vocation } = formState;
 
   const submit = () => {
     const maybePerson = getPerson({ first, last, vocation });
@@ -31,36 +32,32 @@ const CreatePerson: React.FC<CreatePersonProps> = ({ createPerson }) => {
     else alert("whoops");
   };
 
-  const { first, last, vocation } = formState;
-
   return (
     <div>
       <input
         type="text"
         placeholder="first name"
         value={first}
-        onChange={(e) =>
-          updateFormState({ ...formState, first: e.target.value })
+        onChange={({ target }) =>
+          updateFormState({ ...formState, first: target.value })
         }
       />
 
       <input
-        name="last"
         type="text"
         placeholder="last name"
         value={last}
-        onChange={(e) =>
-          updateFormState({ ...formState, last: e.target.value })
+        onChange={({ target }) =>
+          updateFormState({ ...formState, last: target.value })
         }
       />
 
       <select
-        name="vocation"
         value={vocation}
-        onChange={(e) =>
+        onChange={({ target }) =>
           updateFormState({
             ...formState,
-            vocation: e.target.value as Vocation,
+            vocation: target.value as Vocation,
           })
         }
       >

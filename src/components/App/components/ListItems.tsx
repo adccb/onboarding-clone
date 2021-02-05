@@ -4,7 +4,7 @@ import type { Person } from "../../../types/";
 
 type ListItemsProps = {
   items: Person[];
-  deleteItem: (arg0: Person) => void;
+  deleteItem: (arg0: Person) => Promise<void>;
 };
 
 const ListItems: React.FC<ListItemsProps> = ({ items, deleteItem }) => (

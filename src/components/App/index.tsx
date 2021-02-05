@@ -12,16 +12,20 @@ import "./main.css";
 const App = () => {
   const [state, setState] = useState({ people });
 
-  // add the person, and update local state with the result
+  // api actions: keeping everything as promises, so the
+  // consuming components can just .then and be sure that
+  // the api action has completed before updating frontend state
+
   const addPerson = (toAdd: Person) =>
+    // add the person, and update local state with the result
     handleApiCall({ verb: "PUT", person: toAdd }).then((person) =>
       setState({
         people: [toAdd, ...state.people],
       })
     );
 
-  // delete the person, then use the result to filter out local state
   const deletePerson = (toDelete: Person) =>
+    // delete the person, then use the result to filter out local state
     handleApiCall({ verb: "DELETE", person: toDelete }).then((person) =>
       setState({
         people: state.people.filter(
