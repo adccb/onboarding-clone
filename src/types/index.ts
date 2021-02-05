@@ -20,6 +20,11 @@ export const isPerson = (foo: object | Person): foo is Person =>
   typeof foo.name.first === "string" &&
   typeof foo.vocation === "string";
 
+export const isSamePerson = (p: Person, q: Person) =>
+  p.name.first === q.name.first &&
+  p.name.last === q.name.last &&
+  p.vocation === q.vocation;
+
 // for testing purposes i always like to include one of these
 export type GetPersonProps = {
   first?: string;
