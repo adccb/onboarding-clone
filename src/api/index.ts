@@ -6,5 +6,5 @@ export type Delete = { verb: "DELETE"; person: Person };
 
 export type ApiRequest = Create | Update | Delete;
 
-const handleApiCall = (request: ApiRequest) => request.person;
+const handleApiCall = (request: ApiRequest) => Promise.resolve(request.person);
 export default handleApiCall;
